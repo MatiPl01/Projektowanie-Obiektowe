@@ -2,8 +2,7 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.Serial;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +17,7 @@ import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class ShopFrame extends JFrame {
 
+	@Serial
 	private static final long serialVersionUID = 6578553391433363839L;
 
 	private static final String CATEGORIES_PANEL = "Categories Panel";
@@ -34,13 +34,11 @@ public class ShopFrame extends JFrame {
 
 	private JPanel mainPanel;
 
-	private CategoriesPanel categoriesPanel;
-
 	private ItemsPanel itemsPanel;
 
 	private ItemDetailsPanel itemDetailsPanel;
 
-	private ShopController shopController;
+	private final ShopController shopController;
 
 	private CartPanel cartPanel;
 
@@ -110,13 +108,7 @@ public class ShopFrame extends JFrame {
 		
 		cartPanel.add(cartButtonPanel, BorderLayout.LINE_END);
 
-		cartButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				displayPanel(CART_PANEL);
-			}
-		});
+		cartButton.addActionListener(arg0 -> displayPanel(CART_PANEL));
 
 		return cartPanel;
 
@@ -128,7 +120,7 @@ public class ShopFrame extends JFrame {
 		mainPanel.setLayout(mainPanelLayout);
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 
-		categoriesPanel = new CategoriesPanel(shopController);
+		CategoriesPanel categoriesPanel = new CategoriesPanel(shopController);
 		itemsPanel = new ItemsPanel(shopController);
 		itemDetailsPanel = new ItemDetailsPanel(shopController);
 		cartPanel = new CartPanel(shopController);
@@ -146,6 +138,4 @@ public class ShopFrame extends JFrame {
 	private void displayPanel(String panelId) {
 		mainPanelLayout.show(mainPanel, panelId);
 	}
-	
-
 }

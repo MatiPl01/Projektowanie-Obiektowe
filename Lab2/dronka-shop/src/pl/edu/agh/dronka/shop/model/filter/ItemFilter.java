@@ -1,35 +1,35 @@
 package pl.edu.agh.dronka.shop.model.filter;
 
+import pl.edu.agh.dronka.shop.model.enums.Category;
 import pl.edu.agh.dronka.shop.model.items.Item;
+import pl.edu.agh.dronka.shop.model.util.PropertiesHelper;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ItemFilter {
+	private Category category;
+	private Set<String> appliedFilters;
 
-	private Item itemSpec = new Item();
-
-	public Item getItemSpec() {
-		return itemSpec;
+	public void setCategory(Category category) {
+		this.category = category;
+		appliedFilters = new HashSet<>();
 	}
+
+	public void setFilter(String propertyName, boolean value) {
+		if (value) appliedFilters.add(propertyName);
+		else appliedFilters.remove(propertyName);
+	}
+
 	public boolean appliesTo(Item item) {
-		if (itemSpec.getName() != null
-				&& !itemSpec.getName().equals(item.getName())) {
-			return false;
-		}
-		if (itemSpec.getCategory() != null
-				&& !itemSpec.getCategory().equals(item.getCategory())) {
-			return false;
-		}
+		if (item.getCategory() != category) return false;
 
-		// applies filter only if the flag (secondHand) is true)
-		if (itemSpec.isSecondhand() && !item.isSecondhand()) {
-			return false;
-		}
+		Map<String, Object> itemPropertiesMap = PropertiesHelper.getItemPropertiesMap(item);
 
-		// applies filter only if the flag (polish) is true)
-		if (itemSpec.isPolish() && !item.isPolish()) {
-			return false;
+		for (String propertyName: appliedFilters) {
+			if (!(boolean) itemPropertiesMap.get(propertyName)) return false;
 		}
-
 		return true;
 	}
-
 }

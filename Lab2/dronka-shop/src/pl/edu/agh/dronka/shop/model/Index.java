@@ -10,9 +10,9 @@ import pl.edu.agh.dronka.shop.model.items.Item;
 
 public class Index {
 
-	private List<Item> items = new ArrayList<>();
+	private final List<Item> items = new ArrayList<>();
 
-	private List<Category> categories = new LinkedList<>();
+	private final List<Category> categories = new LinkedList<>();
 
 	public void addItem(Item item) {
 		items.add(item);
@@ -23,8 +23,8 @@ public class Index {
 	}
 	
 	public Category getCategory(String name) {
-		for(Category category : categories) {
-			if(category.getDisplayName().equals(name)) {
+		for (Category category : categories) {
+			if (category.getDisplayName().equals(name)) {
 				return category;
 			}
 		}
@@ -57,7 +57,7 @@ public class Index {
 	public List<Item> getItems(ItemFilter filter) {
 		List<Item> result = new LinkedList<>();
 		
-		for (Item item : items) {
+		for (Item item: items) {
 			if (filter.appliesTo(item)) {
 				result.add(item);
 			}

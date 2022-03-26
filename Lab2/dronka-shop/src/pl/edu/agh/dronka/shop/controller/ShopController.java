@@ -84,7 +84,5 @@ public class ShopController {
 	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
 		shopView.getItemsPanel().setItems(itemsIndex.getItems(filter));
-
 	}
-
 }

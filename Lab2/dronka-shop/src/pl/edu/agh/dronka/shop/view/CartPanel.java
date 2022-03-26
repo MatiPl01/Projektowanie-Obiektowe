@@ -1,8 +1,7 @@
 package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +18,13 @@ import pl.edu.agh.dronka.shop.model.User;
 
 public class CartPanel extends JPanel {
 
+	@Serial
 	private static final long serialVersionUID = 1619310843639460294L;
 
-	private ShopController shopController;
+	private final ShopController shopController;
 	private JLabel summaryValueLabel;
-	private JTable cartTable;
 
-	private List<Item> cartItems = new ArrayList<>();
+	private final List<Item> cartItems = new ArrayList<>();
 
 	private CartTableModel cartTableModel;
 
@@ -54,7 +53,7 @@ public class CartPanel extends JPanel {
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 		JPanel userPanel = createUserPanel();
-		cartTable = createItemsCartPanel();
+		JTable cartTable = createItemsCartPanel();
 		JPanel buttonsPanel = createButtonsPanel();
 		JPanel summaryPanel =  createSummaryPanel();
 
@@ -79,21 +78,10 @@ public class CartPanel extends JPanel {
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(buyButton);
 
-		backButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				shopController.showCategories();
-			}
-		});
-
-		buyButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cartModel.clearCart();
-				refresh();
-			}
+		backButton.addActionListener(arg0 -> shopController.showCategories());
+		buyButton.addActionListener(e -> {
+			cartModel.clearCart();
+			refresh();
 		});
 
 		return buttonsPanel;
@@ -126,11 +114,12 @@ public class CartPanel extends JPanel {
 	}
 	
 
-	private class CartTableModel extends AbstractTableModel {
+	private static class CartTableModel extends AbstractTableModel {
 
+		@Serial
 		private static final long serialVersionUID = -3876832621582015355L;
 
-		private List<Item> cartItems;
+		private final List<Item> cartItems;
 
 		public CartTableModel(List<Item> cartItems) {
 			this.cartItems = cartItems;
@@ -165,6 +154,4 @@ public class CartPanel extends JPanel {
 		}
 
 	}
-
-	
 }

@@ -1,12 +1,11 @@
 package pl.edu.agh.dronka.shop.model;
 
 public class User {
-
-	private String name;
+	private final String name;
 	
-	private String surname;
+	private final String surname;
 	
-	private Cart cart;
+	private final Cart cart;
 	
 
 	public User(String name, String surname) {

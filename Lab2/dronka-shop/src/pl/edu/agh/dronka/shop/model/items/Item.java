@@ -23,8 +23,7 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Item() {
-	}
+	public Item() {}
 
 	public void setName(String name) {
 		this.name = name;

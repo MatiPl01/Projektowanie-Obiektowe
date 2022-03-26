@@ -2,6 +2,7 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.io.Serial;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
@@ -15,10 +16,11 @@ import pl.edu.agh.dronka.shop.model.util.PropertiesHelper;
 
 public class ItemDetailsPanel extends JPanel {
 
+	@Serial
 	private static final long serialVersionUID = 7620300297634323349L;
 
 	private JPanel infoPanel;
-	private ShopController shopController;
+	private final ShopController shopController;
 
 	private Item currentItem;
 
@@ -34,11 +36,10 @@ public class ItemDetailsPanel extends JPanel {
 		this.currentItem = item;
 
 		Map<String, Object> propertiesMap = PropertiesHelper
-				.getPropertiesMap(item);
+				.getItemPropertiesMap(item);
 
 		for (String displayName : propertiesMap.keySet()) {
-			createInfoLabel(displayName, propertiesMap.get(displayName)
-					.toString());
+			createInfoLabel(displayName, propertiesMap.get(displayName).toString());
 		}
 
 		addToCartButton.setEnabled(item.getQuantity() > 0);

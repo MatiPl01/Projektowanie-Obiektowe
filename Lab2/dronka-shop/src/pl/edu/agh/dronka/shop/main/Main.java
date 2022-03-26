@@ -23,18 +23,16 @@ public class Main {
 			}
 	
 		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ShopController shopController = new ShopController();
-				shopController.setModel(ShopProvider.getExampleShop());
-				ShopFrame shopFrame = new ShopFrame(shopController);
-				shopController.logIn(ShopProvider.getExampleUser());
-				shopFrame
-						.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-				
-				shopFrame.setIconImage(new ImageIcon("resources/images/dronka.jpeg").getImage());
-				shopFrame.setVisible(true);
-			}
+		javax.swing.SwingUtilities.invokeLater(() -> {
+			ShopController shopController = new ShopController();
+			shopController.setModel(ShopProvider.getExampleShop());
+			ShopFrame shopFrame = new ShopFrame(shopController);
+			shopController.logIn(ShopProvider.getExampleUser());
+			shopFrame
+					.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+			shopFrame.setIconImage(new ImageIcon("resources/images/dronka.jpeg").getImage());
+			shopFrame.setVisible(true);
 		});
 	}
 }

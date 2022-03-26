@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class CSVReader {
 
-	private Map<String, Integer> header = new HashMap<>();
+	private final Map<String, Integer> header = new HashMap<>();
 
-	private List<String[]> data = new LinkedList<>();
+	private final List<String[]> data = new LinkedList<>();
 
-	private String filename;
+	private final String filename;
 
 	public CSVReader(String filename) {
 		this.filename = filename;
@@ -48,7 +48,5 @@ public class CSVReader {
 		for (int i = 0; i < headerLine.length; i++) {
 			header.put(headerLine[i], i);
 		}
-
 	}
-
 }

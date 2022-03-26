@@ -2,8 +2,7 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.Serial;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +15,7 @@ import pl.edu.agh.dronka.shop.model.enums.Category;
 
 public class CategoriesPanel extends JPanel {
 
+	@Serial
 	private static final long serialVersionUID = -5107029028540534486L;
 
 	private final ShopController shopController;
@@ -32,7 +32,6 @@ public class CategoriesPanel extends JPanel {
 		
 		for (Category category : shopController.getModel().getItemsIndex().getCategories()) {
 			addCategoryLink(category);
-			
 		}
 	}
 
@@ -44,15 +43,7 @@ public class CategoriesPanel extends JPanel {
 		button.setBorderPainted(false);
 		button.setOpaque(false);
 		button.setBackground(Color.WHITE);
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				shopController.showItems(category);
-				
-			}
-			
-		});
+		button.addActionListener(arg0 -> shopController.showItems(category));
 		add(button);
 	}
 }
