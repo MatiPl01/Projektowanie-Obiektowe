@@ -5,7 +5,7 @@ import pl.agh.edu.dp.labirynth.Direction;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class Room extends MapSide {
+public abstract class Room extends MapSide {
     private final int roomNumber;
     private final Map<Direction, MapSide> sides;
 

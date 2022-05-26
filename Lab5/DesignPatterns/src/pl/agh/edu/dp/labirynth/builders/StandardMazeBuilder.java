@@ -2,24 +2,29 @@ package pl.agh.edu.dp.labirynth.builders;
 
 import pl.agh.edu.dp.labirynth.Direction;
 import pl.agh.edu.dp.labirynth.Maze;
-import pl.agh.edu.dp.labirynth.components.Wall;
 import pl.agh.edu.dp.labirynth.components.Door;
 import pl.agh.edu.dp.labirynth.components.MapSide;
 import pl.agh.edu.dp.labirynth.components.Room;
+import pl.agh.edu.dp.labirynth.factories.MazeFactory;
 
 import java.util.Arrays;
 
 public class StandardMazeBuilder implements MazeBuilder {
+    private final MazeFactory mazeFactory;
     private final Maze currentMaze = new Maze();
 
     public Maze getCurrentMaze() {
         return currentMaze;
     }
 
+    public StandardMazeBuilder(MazeFactory mazeFactory) {
+        this.mazeFactory = mazeFactory;
+    }
+
     @Override
     public void addRoom(Room room) {
         Arrays.stream(Direction.values())
-                .forEach(direction -> room.setSide(direction, new Wall()));
+                .forEach(direction -> room.setSide(direction, mazeFactory.createWall()));
         currentMaze.addRoom(room);
     }
 
@@ -41,7 +46,7 @@ public class StandardMazeBuilder implements MazeBuilder {
             throw new Exception("Room " + room1 + " and room " + room2 + " don't have a common wall");
         }
         // Create the door on the common wall between the rooms
-        Door door = new Door(room1, room2);
+        Door door = mazeFactory.createDoorBetween(room1, room2);
         room1.setSide(room1Direction, door);
         room2.setSide(room1Direction.getOppositeDirection(), door);
     }

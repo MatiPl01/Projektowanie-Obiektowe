@@ -2,15 +2,17 @@ package pl.agh.edu.dp.main;
 
 import pl.agh.edu.dp.labirynth.*;
 import pl.agh.edu.dp.labirynth.builders.StandardMazeBuilder;
+import pl.agh.edu.dp.labirynth.factories.EnchantedMazeFactory;
 
 public class Main {
     public static void main(String[] args) {
-        StandardMazeBuilder mazeBuilder = new StandardMazeBuilder();
+        EnchantedMazeFactory mazeFactory = new EnchantedMazeFactory();
+        StandardMazeBuilder mazeBuilder = new StandardMazeBuilder(mazeFactory);
 
         MazeGame mazeGame = new MazeGame();
 
         try {
-            mazeGame.createMaze(mazeBuilder);
+            mazeGame.createMaze(mazeBuilder, mazeFactory);
         } catch (Exception e) {
             e.printStackTrace();
             return;
