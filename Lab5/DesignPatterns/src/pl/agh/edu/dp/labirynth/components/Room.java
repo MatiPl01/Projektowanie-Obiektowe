@@ -19,11 +19,6 @@ public abstract class Room extends MapSide {
         return String.valueOf(roomNumber);
     }
 
-    @Override
-    public void enter() {
-
-    }
-
     public MapSide getSide(Direction direction){
         return this.sides.get(direction);
     }

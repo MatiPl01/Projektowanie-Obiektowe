@@ -2,8 +2,8 @@ package pl.agh.edu.dp.labirynth;
 
 public enum Direction {
     NORTH("North"),
-    SOUTH("South"),
     EAST("East"),
+    SOUTH("South"),
     WEST("West");
 
     private final String displayedName;

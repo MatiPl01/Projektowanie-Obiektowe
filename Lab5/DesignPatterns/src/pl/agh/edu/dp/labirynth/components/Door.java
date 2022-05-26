@@ -10,8 +10,13 @@ public class Door extends MapSide {
     }
 
     @Override
-    public void enter() {
+    public String toString() {
+        return "Door(" + room1 + ", " + room2 + ")";
+    }
 
+    @Override
+    public void enter() {
+        System.out.println("You went through the door");
     }
 
     public Room getRoom1() {

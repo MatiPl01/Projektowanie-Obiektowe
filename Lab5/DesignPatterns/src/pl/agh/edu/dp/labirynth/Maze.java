@@ -8,19 +8,22 @@ public class Maze {
     private Vector<Room> rooms;
 
     public Maze() {
-        this.rooms = new Vector<Room>();
+        this.rooms = new Vector<>();
     }
 
     public void addRoom(Room room){
         rooms.add(room);
     }
 
+    public Vector<Room> getRooms(){
+        return rooms;
+    }
+
     public void setRooms(Vector<Room> rooms) {
         this.rooms = rooms;
     }
 
-    public int getRoomsCount()
-    {
+    public int getRoomsCount() {
         return rooms.size();
     }
 }
